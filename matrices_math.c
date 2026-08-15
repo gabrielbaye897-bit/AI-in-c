@@ -64,6 +64,30 @@ matrix_t make_matrix_from_data(size_t rows, size_t columns, float *data)
 }
 
 
+matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data)
+{
+  matrix_t m = {0};
+
+  m.width = columns;
+  m.height = rows;
+  m.size = rows * columns;
+
+  if (m.size != sizeof(data)/sizeof(data[0]))
+  {
+    m.width = 0;
+    m.height = 0;
+    m.size = 0 ;
+
+    return m;
+  }
+
+  for (size_t i = 0; i < sizeof(data)/sizeof(data[0]); i++)
+    m.array[i] = data[i];
+
+  free(data);
+
+  return m ;
+
 
 matrix_t create_matrix(size_t rows, size_t columns)
 {

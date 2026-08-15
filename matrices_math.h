@@ -39,7 +39,7 @@ typedef struct {
 // BE CAREFULL WITH MY DOG SHIT OF A CODE PLS 
 // NOTE FOR ME LATER pls don't use that a lot or only when needed
 
-
+matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data);
 
 
  matrix_t create_matrix(size_t rows, size_t columns);
