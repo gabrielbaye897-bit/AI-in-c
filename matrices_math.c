@@ -71,8 +71,10 @@ matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data)
   m.width = columns;
   m.height = rows;
   m.size = rows * columns;
+  m.array = malloc(m.size * sizeof(float));
 
-  if (m.size != sizeof(data)/sizeof(data[0]))
+
+  if (m.array == NULL)
   {
     m.width = 0;
     m.height = 0;
@@ -80,13 +82,14 @@ matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data)
 
     return m;
   }
-
-  for (size_t i = 0; i < sizeof(data)/sizeof(data[0]); i++)
+  
+  for (size_t i = 0; i < m.size; i++)
     m.array[i] = data[i];
 
-  free(data);
 
   return m ;
+
+}
 
 
 matrix_t create_matrix(size_t rows, size_t columns)
@@ -144,6 +147,7 @@ matrix_t add_matrix(matrix_t a,matrix_t b)
     output.array[i] = a.array[i] + b.array[i];
   }
 
+
   return output;
 }
 
@@ -165,14 +169,27 @@ matrix_t scalar_mult(float coeficient,matrix_t m)
      output.array[i] = m.array[i] * coeficient ;
   }
 
-  
+
   return output;
 }
 
 
 matrix_t sub_matrix(matrix_t a, matrix_t b)
 {
-    return add_matrix(a, scalar_mult(-1.0f, b));
+      matrix_t output = {0};
+
+    if (a.height != b.height || a.width != b.width)
+        return output;
+
+    output = create_matrix(a.height, a.width);
+
+    if (output.array == NULL)
+        return output;
+
+    for (size_t i = 0; i < output.size; ++i)
+        output.array[i] = a.array[i] - b.array[i];
+
+    return output;
 }
 
 
@@ -215,10 +232,9 @@ matrix_t transpose_matrix(matrix_t m)
 {
   matrix_t output = create_matrix(m.width,m.height);
 
-  if (output.array ==NULL )
-  {
+  if (output.array == NULL )
     return output ;
-  }
+  
 
   for (size_t rows = 0 ; rows < m.height; rows++)
   {
@@ -229,6 +245,33 @@ matrix_t transpose_matrix(matrix_t m)
   }
   return output ;
 }
+
+
+matrix_t hadamard(matrix_t a,matrix_t b)
+{
+  matrix_t output = {0};
+
+  if (a.height != b.height || b.width != a.width )
+    return output;
+
+  output = create_matrix(a.height,a.width);
+
+  if (output.array == NULL)
+    return output;
+
+  for (int i = 0 ; i < a.size ;i++)
+  {
+    output.array[i]=a.array[i] * b.array[i];
+  }
+
+  return output;
+}
+
+
+
+
+
+
 
 
 

@@ -35,11 +35,19 @@ matrix_t VV1 = make_matrix_from_data_owned(2,5,data_VV1);
 
 print_matrix(VV);
 
-print_matrix(add_matrix(VV,VV1));
 
-print_matrix(scalar_mult(-1,VV));
+matrix_t step_print = add_matrix(VV,VV1);
 
-print_matrix(sub_matrix(VV,VV1));
+matrix_t duck_tape = scalar_mult(-1,VV);
+
+matrix_t brochacho = sub_matrix(VV,VV1);
+
+
+print_matrix(step_print);
+
+print_matrix(duck_tape);
+
+print_matrix(brochacho);
 
 
 matrix_t C = matmult(A, B);
@@ -55,6 +63,9 @@ free_mat(&C);
 free_mat(&T);
 free_mat(&VV);
 free_mat(&VV1);
+free_mat(&step_print);
+free_mat(&duck_tape);
+free_mat(&brochacho);
 
 
 
