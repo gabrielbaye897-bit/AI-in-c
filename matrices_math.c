@@ -51,7 +51,7 @@ matrix_t vectomat(vector_t v)
 }
 
 
-matrix_t make_matrix_from_data(size_t rows, size_t columns, float *data)
+matrix_t matrix_view_from_data(size_t rows, size_t columns, float *data)
 {
   matrix_t m;
 
@@ -64,7 +64,7 @@ matrix_t make_matrix_from_data(size_t rows, size_t columns, float *data)
 }
 
 
-matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data)
+matrix_t matrix_copy_from_data(size_t rows,size_t columns, float *data)
 {
   matrix_t m = {0};
 
@@ -92,7 +92,7 @@ matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data)
 }
 
 
-matrix_t create_matrix(size_t rows, size_t columns)
+matrix_t matrix_create(size_t rows, size_t columns)
 {
     matrix_t m;
 
@@ -137,7 +137,7 @@ matrix_t add_matrix(matrix_t a,matrix_t b)
     return output ;
   }
 
-  output = create_matrix(a.height,a.width);
+  output = matrix_create(a.height,a.width);
 
   if (output.array == NULL)
     return output;
@@ -157,7 +157,7 @@ matrix_t scalar_mult(float coeficient,matrix_t m)
 {
   matrix_t output ;
 
-  output = create_matrix(m.height,m.width);
+  output = matrix_create(m.height,m.width);
 
   if (output.array == NULL)
   {
@@ -181,7 +181,7 @@ matrix_t sub_matrix(matrix_t a, matrix_t b)
     if (a.height != b.height || a.width != b.width)
         return output;
 
-    output = create_matrix(a.height, a.width);
+    output = matrix_create(a.height, a.width);
 
     if (output.array == NULL)
         return output;
@@ -230,7 +230,7 @@ matrix_t matmult(matrix_t a, matrix_t b)
 
 matrix_t transpose_matrix(matrix_t m)
 {
-  matrix_t output = create_matrix(m.width,m.height);
+  matrix_t output = matrix_create(m.width,m.height);
 
   if (output.array == NULL )
     return output ;
@@ -254,7 +254,7 @@ matrix_t hadamard(matrix_t a,matrix_t b)
   if (a.height != b.height || b.width != a.width )
     return output;
 
-  output = create_matrix(a.height,a.width);
+  output = matrix_create(a.height,a.width);
 
   if (output.array == NULL)
     return output;
@@ -269,12 +269,171 @@ matrix_t hadamard(matrix_t a,matrix_t b)
 
 
 
+matrix_t row_sum(matrix_t m)
+{
+  matrix_t output ={0};
+  
+  output =  create_matrix(m.size,1);
+
+  if (m.array == NULL)
+    return output;
+
+
+  for (size_t row = 0 ; row < m.height ; row++)
+  {
+    float sum = 0.0f ;
+
+    for (size_t col = 0 ; col < m.width ; col++)
+    {
+      sum += m.array[row * m.width + col];
+    }
+    output.array[row] = sum;
+  }
+
+  return output ;
+}
+
+matrix_t col_sum(matrix_t m)
+{
+     matrix_t output = create_matrix(1, m.width);
+
+    if (output.array == NULL)
+        return output;
+
+    for (size_t col = 0; col < m.width; col++)
+    {
+        float sum = 0.0f;
+
+        for (size_t row = 0; row < m.height; row++)
+        {
+            sum += m.array[row * m.width + col];
+        }
+
+        output.array[col] = sum;
+    }
+
+    return output;
+
+}
+
+matrix_t row_max(matrix_t m)
+{
+
+    matrix_t output = create_matrix(m.height, 1);
+
+    if (output.array == NULL)
+        return output;
+
+    for (size_t row = 0; row < m.height; row++)
+    {
+        float max = m.array[row * m.width];
+
+        for (size_t col = 1; col < m.width; col++)
+        {
+            float value = m.array[row * m.width + col];
+
+            if (value > max)
+                max = value;
+        }
+
+        output.array[row] = max;
+    }
+
+    return output;
+
+}
+
+matrix_t ReLU_matrix(matrix_t m)
+{
+   matrix_t output = create_matrix(m.height, m.width);
+
+    if (output.array == NULL)
+        return output;
+
+    for (size_t i = 0; i < m.size; i++)
+    {
+        if (m.array[i] > 0.0f)
+            output.array[i] = m.array[i];
+        else
+            output.array[i] = 0.0f;
+    }
+
+    return output;
+}
+
+matrix_t ReLU_matrix_derivate(matrix_t m)
+{
+   matrix_t output = create_matrix(m.height, m.width);
+
+    if (output.array == NULL)
+        return output;
+
+    for (size_t i = 0; i < m.size; i++)
+    {
+        if (m.array[i] > 0.0f)
+            output.array[i] = 1;0f;
+        else
+            output.array[i] = 0.0f;
+    }
+
+    return output;
+
+}
 
 
 
 
 
+void scalar_mult_inplace(float coefficient, matrix_t *m)
+{
+  if (dst == NULL)
+    return;
+
+  for (size_t i = 0 ;i < m->size:i++)
+  {
+    m->array[i] = m->array[i] * coefficient;
+  }
+}
 
 
+void add_matrices_inplace(matrix_t *dst, matrix_t src)
+{
+  if (dst == NULL)
+    return;
 
+  if (dst->height != src.height || dst->width != src.height)
+    return;
 
+  for(size_t i =0;i < dst->size ;i++)
+  {
+    dst->array[i] += src.array[i] ;
+  }
+}
+
+void sub_matrices_inplace(matrix_t *dst,matrix_t src)
+{
+  if (dst == NULL)
+    return;
+
+  if (dst->height != src.height || dst->width != src.height)
+    return;
+
+  for (size_t i = 0 ;i < dst->size; i++)
+  {
+    dst->array[i] -= scr.array[i] ;
+  }
+}
+
+void hadamard_inplace(matrix_t *dst,matrix_t src)
+{
+  if (dst == NULL)
+    return;
+
+  if (dst->height != src.height || dst->width != src.height)
+    return;
+
+  for (size_t i = 0 ; i < dst->size; i++)
+  {
+    dst->array[i] = dst->array[i] * src.array[i];
+  }
+}

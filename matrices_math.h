@@ -39,10 +39,11 @@ typedef struct {
 // BE CAREFULL WITH MY DOG SHIT OF A CODE PLS 
 // NOTE FOR ME LATER pls don't use that a lot or only when needed
 
-matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data);
+ matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data);
 
 
  matrix_t create_matrix(size_t rows, size_t columns);
+
 
  void free_mat(matrix_t *m);
 
@@ -79,7 +80,26 @@ matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data);
  matrix_t ReLU_derivate_matrix(matrix_t m);
 
 
+//     _inplace version modiffies the matrix_t passed to them 
+//     so it does not need to reallocate memory and make an easyer
+//     memory management when doing cacul with d = 512 in R^d or even in R^(d*d)
 
+
+
+ void scalar_mult_inplace(float coefficient, matrix_t *m);
+ void add_matrices_inplace(matrix_t *dst,matrix_t src);
+ void sub_matrices_inplace(matrix_t *dst,matrix_t src);
+ void hadamard_inplace(matrix_t *dst, matrix_t src);
+ 
+ //defined but not inplemented yet 
+ 
+ void matmult_inplace();
+
+ void transpose_inplace();
+ 
+ // end
+ 
+ void ReLU_inplace();
 
 
 
