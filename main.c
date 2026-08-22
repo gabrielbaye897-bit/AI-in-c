@@ -14,11 +14,11 @@ float b_data[] = {
     50, 60
 };
 
-matrix_t A = make_matrix_from_data(2, 3, a_data);
-matrix_t B = make_matrix_from_data(3, 2, b_data);
+matrix_t A = matrix_copy_from_data(2, 3, a_data);
+matrix_t B = matrix_copy_from_data(3, 2, b_data);
 
 
-matrix_t VV = create_matrix(2,5);
+matrix_t VV = matrix_create(2,5);
 
 
 
@@ -31,7 +31,7 @@ for (size_t i = 0; i < VV.size; i++)
 float data_VV1[]= {10,9,8,7,6,5,4,3,2,1};
 
 
-matrix_t VV1 = make_matrix_from_data_owned(2,5,data_VV1);
+matrix_t VV1 = matrix_copy_from_data(2,5,data_VV1);
 
 print_matrix(VV);
 
@@ -66,7 +66,8 @@ free_mat(&VV1);
 free_mat(&step_print);
 free_mat(&duck_tape);
 free_mat(&brochacho);
-
+free_mat(&A);
+free_mat(&B);
 
 
 }

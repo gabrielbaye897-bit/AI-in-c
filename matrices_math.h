@@ -34,15 +34,15 @@ typedef struct {
 //          matrix creation 
 // 
 // this is also a no freeable pointer that is returned 
- matrix_t make_matrix_from_data(size_t rows ,size_t columns, float *data);
+ matrix_t matrix_view_from_data(size_t rows ,size_t columns, float *data);
 // ----------------------------------------------------------------------
 // BE CAREFULL WITH MY DOG SHIT OF A CODE PLS 
 // NOTE FOR ME LATER pls don't use that a lot or only when needed
 
- matrix_t make_matrix_from_data_owned(size_t rows,size_t columns, float *data);
+ matrix_t matrix_copy_from_data(size_t rows,size_t columns, float *data);
 
 
- matrix_t create_matrix(size_t rows, size_t columns);
+ matrix_t matrix_create(size_t rows, size_t columns);
 
 
  void free_mat(matrix_t *m);
@@ -77,7 +77,7 @@ typedef struct {
 
  matrix_t ReLU_matrix(matrix_t m);
 
- matrix_t ReLU_derivate_matrix(matrix_t m);
+ matrix_t ReLU_matrix_derivate(matrix_t m);
 
 
 //     _inplace version modiffies the matrix_t passed to them 
