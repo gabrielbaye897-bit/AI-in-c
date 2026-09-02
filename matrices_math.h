@@ -41,42 +41,33 @@ typedef struct {
 
  matrix_t matrix_copy_from_data(size_t rows,size_t columns, float *data);
 
-
+ // i don't know why you would use that ??
  matrix_t matrix_create(size_t rows, size_t columns);
 
-
+ // most important function here ...
  void free_mat(matrix_t *m);
 
 
 //         basic operations
 
  void print_matrix(matrix_t m);
-
  matrix_t scalar_mult(float coeficient,matrix_t m);
-
  matrix_t add_matrix(matrix_t a,matrix_t b);
-
  matrix_t sub_matrix(matrix_t a,matrix_t b);
-
  matrix_t matmult(matrix_t a,matrix_t b);
-
  matrix_t transpose_matrix(matrix_t m);
-
  matrix_t hadamard(matrix_t a, matrix_t);
 
  //     matrix reduction 
 
  matrix_t row_sum(matrix_t m);
-
  matrix_t col_sum(matrix_t m);
-
  matrix_t row_max(matrix_t m);
 
  //      matrix activation function 
  //      (here bc i don't see why you would use a matrix lib if it's not for ai 
 
  matrix_t ReLU_matrix(matrix_t m);
-
  matrix_t ReLU_matrix_derivate(matrix_t m);
 
 
@@ -85,24 +76,18 @@ typedef struct {
 //     memory management when doing cacul with d = 512 in R^d or even in R^(d*d)
 
 
-
  void scalar_mult_inplace(float coefficient, matrix_t *m);
- void add_matrices_inplace(matrix_t *dst,matrix_t src);
- void sub_matrices_inplace(matrix_t *dst,matrix_t src);
+ void add_matrix_inplace(matrix_t *dst,matrix_t src);
+ void sub_matrix_inplace(matrix_t *dst,matrix_t src);
  void hadamard_inplace(matrix_t *dst, matrix_t src);
- 
- //defined but not inplemented yet 
- 
- void matmult_inplace();
+ void ReLU_matrix_inplace(matrix_t *m);
+ void ReLU_matrix_derivate_inplace(matrix_t *m);
 
- void transpose_inplace();
- 
- // end
- 
- void ReLU_inplace();
+ //    _into instead of returning the matrix_t put it into &dst
 
-
-
+ void add_matrix_into(matrix_t *dst,matrix_t A,matrix_t B);
+ void transpose_into(matrix_t *dst,matrix_t m);
+ void matmult_into(matrix_t *dst,matrix_t A,matrix_t B);
 
 
 #endif
