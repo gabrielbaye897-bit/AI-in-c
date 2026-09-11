@@ -9,11 +9,13 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 
+# matrix and neural network libs
 add_executable(app
 	main.c
 	matrices_math.c
 	test_matrices_math.c
 )
+
 
 target_compile_options(app PRIVATE
     -Wall
@@ -21,9 +23,5 @@ target_compile_options(app PRIVATE
     -Wpedantic
     -Werror
 )
-
-target_link_libraries(app PRIVATE
-	m
-)
-
+target_link_libraries(app PRIVATE m)
 

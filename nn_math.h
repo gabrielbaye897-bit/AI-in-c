@@ -6,10 +6,13 @@
 
 //compute mean /variance for each row and return a width of 1 
 matrix_t row_mean(matrix_t m);
+matrix_t col_mean(matrix_t m);
 matrix_t row_variance(matrix_t m);
+matrix_t col_variance(matrix_t m);
 
 
-matrix_t layer_norm(matrix_t m, float epsilon);
+
+void Layer_Norm_into(matrix_t &out,matrix_t *gamma,matrix_t *beta,matrix_t X, float epsilon);
 matrix_t softmax(matrix_t m);
 
 /*

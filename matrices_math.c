@@ -75,13 +75,7 @@ matrix_t matrix_copy_from_data(size_t rows,size_t columns, float *data)
 
 
   if (m.array == NULL)
-  {
-    m.width = 0;
-    m.height = 0;
-    m.size = 0 ;
-
     return m;
-  }
   
   for (size_t i = 0; i < m.size; i++)
     m.array[i] = data[i];
@@ -103,13 +97,10 @@ matrix_t matrix_create(size_t rows, size_t columns)
     m.array = malloc(m.size * sizeof(float));
 
     if (m.array == NULL)
-    {
-        m.height = 0;
-        m.width = 0;
-        m.size = 0;
-    }
+    	return m;
 
     return m;
+
 }
 
 
