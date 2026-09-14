@@ -11,7 +11,7 @@ int main ()
 		printf("failures : %d",error_math_test);
 		return error_math_test;
 	}
-
+	
 	printf("main as exited correctly and every test was succesful\n");
 	return 0;	
 

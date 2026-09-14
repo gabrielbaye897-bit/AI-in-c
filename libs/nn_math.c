@@ -175,7 +175,7 @@ matrix_t softmax(matrix_t m)
 
 
 
-int main(){
+int do_a_shitty_test(void){
 
 	matrix_t softmax_test = matrix_create(2,3);
 	float data_soft[] = {1,2,3,0,0,0};

@@ -10,6 +10,7 @@
 
 int test_nn_math(void)
 {
+	//this is useless now lol 
 
-
+	return 1 + 1;
 }
