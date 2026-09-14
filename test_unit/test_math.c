@@ -9,11 +9,11 @@
 int main(void)
 {
 	//to-do : add the fucking test LOL ^v^ 
-	do_a_shitty_test();
+	nn_math_test();
 	run_matrices_math_test();
 
 
-	printf("hello from test_math.c");
+	printf("math tested and exited correctly !!\n");
 	return 0;
 
 }

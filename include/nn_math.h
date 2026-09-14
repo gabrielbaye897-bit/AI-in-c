@@ -1,4 +1,4 @@
-#ifdef NN_MATH_H
+#ifndef NN_MATH_H
 #define NN_MATH_H
 
 #include "matrices_math.h"
@@ -12,7 +12,7 @@ matrix_t col_variance(matrix_t m);
 
 
 
-void Layer_Norm_into(matrix_t &out,matrix_t *gamma,matrix_t *beta,matrix_t X, float epsilon);
+void Layer_Norm(matrix_t *out,matrix_t gamma,matrix_t beta,matrix_t X, float epsilon);
 matrix_t softmax(matrix_t m);
 
 /*
