@@ -8,9 +8,8 @@
 
 int main(void)
 {
-	//to-do : add the fucking test LOL ^v^ 
-	nn_math_test();
 	run_matrices_math_test();
+	nn_math_test();
 
 
 	printf("math tested and exited correctly !!\n");

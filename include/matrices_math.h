@@ -52,6 +52,7 @@ typedef struct {
 
  void print_matrix(matrix_t m);
  matrix_t scalar_mult(float coeficient,matrix_t m);
+ matrix_t scalar_div(float coef,matrix_t m);
  matrix_t add_matrix(matrix_t a,matrix_t b);
  matrix_t sub_matrix(matrix_t a,matrix_t b);
  matrix_t matmult(matrix_t a,matrix_t b);

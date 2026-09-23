@@ -1,5 +1,5 @@
 #include "matrices_math.h"
-#include "test_matrices_math.h"
+#include "nn_math.h"
 #include <stdio.h>
 
 int main ()

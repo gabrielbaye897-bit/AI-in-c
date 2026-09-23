@@ -157,6 +157,22 @@ matrix_t scalar_mult(float coeficient,matrix_t m)
 }
 
 
+matrix_t scalar_div(float coef,matrix_t m)
+{
+	matrix_t output;
+
+	output = matrix_create(m.height,m.width);
+	
+	if (output.array == NULL)
+		return output;
+
+	for (size_t i=0; i< m.size ;i++)
+		output.array[i] = m.array[i] / coef;
+
+	return output;
+}
+
+
 matrix_t sub_matrix(matrix_t a, matrix_t b)
 {
       matrix_t output = {0};
@@ -501,4 +517,6 @@ void matmult_into(matrix_t *dst,matrix_t A, matrix_t B)
     }
   }
 }
+
+
 

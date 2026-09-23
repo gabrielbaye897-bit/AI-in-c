@@ -4,51 +4,6 @@
 #include <math.h>
 #include <unistd.h>
 
-// TO-DO : IMPLEMENT 
-/*
-
-int run_matrices_math_test(void); //done
-
-int float_equal(float a, float b);  //done
-
-int matrix_equal(matrix_t a,matrix_t b);  //done
-
-int scalar_matrix_test(void);  //done 
-
-int add_matrix_test(void);  //done 
-
-int sub_matrix_test(void);  //done
-
-int matmult_test(void);  //done 
-
-int transpose_matrix_test(void);  //done
-
-int hadamard_test(void); //done 
-
-int row_sum_test(void);  //done
-
-int col_sum_test(void); //done
-
-int row_max_test(void); //done
-
-int ReLU_matrix_test(void);  //done
-
-int ReLU_matrix_derivate_test(void); //done
-
-int scalar_mult_inplace_test(void);
-
-int add_matrix_inplace_test(void);
-
-int sub_matrix_inplace_test(void);
-
-int matmult_inplace_test(void);
-
-int transpose_inplace_test(void);
-
-int ReLU_matrix_inplace_test(void);
-
-int ReLU_matrix_derivate_inplace_test(void);
-*/
 
 #define RUN_TEST(test)                     \
     do                                     \
